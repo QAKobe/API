@@ -27,7 +27,8 @@ public class Pokemon {
     @Test
     public void getPokemonTest() {
 
-        Response response = RestAssured.given().header("Accept", "application/json").when().get("https://pokeapi.co/api/v2/pokemon").then().statusCode(200)
+        Response response = RestAssured.given().header("Accept", "application/json")
+                .when().get("https://pokeapi.co/api/v2/pokemon").then().statusCode(200)
                 .log().all().extract().response();
 
         Map<String, Object> deserializeResponse = response.as(new TypeRef<Map<String, Object>>() {
@@ -95,10 +96,6 @@ public class Pokemon {
         Assert.assertEquals(1154, deserializedResponse.getCount());
         Assert.assertEquals("https://pokeapi.co/api/v2/pokemon?offset=20&limit=20", deserializedResponse.getNext());
         Assert.assertEquals(20, deserializedResponse.getResults().size());
-
-
-
-
     }
 
 
